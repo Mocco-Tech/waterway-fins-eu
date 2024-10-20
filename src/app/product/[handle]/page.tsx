@@ -4,6 +4,7 @@ import ProductGallery from "@/components/custom/product/ProductGallery";
 import ProductDataProvider from "@/components/custom/product/ProductDataProvider";
 import ProductContent from "@/components/custom/product/ProductContent";
 import { getProduct } from "@/lib/queries/product";
+import StructuredData from "@/components/custom/product/StructuredData";
 
 export const revalidate = 3600;
 
@@ -20,6 +21,7 @@ export default async function ProductPage({ params }: { params: Params }) {
 
         <ProductContent />
       </section>
+      <StructuredData product={product.productByHandle} />
     </ProductDataProvider>
   );
 }

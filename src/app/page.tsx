@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getCategory } from "@/lib/queries/category";
 import { getHomepageCategories } from "@/lib/queries/homepageCategories";
 import { Product } from "@/types/Product";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +12,30 @@ interface CategoryItem {
   title: string;
   image: { src: string };
 }
+
+export const metadata: Metadata = {
+  title: "WaterWay Fins - shop for underwater sport equipment",
+  description:
+    "Welcome to WaterWay Fins ! Here you'll find all you need for underwater sports. Shop for underwater equipment !",
+
+  metadataBase: new URL("https://www.waterwayfins.eu"),
+  openGraph: {
+    title: `WaterWay Fins - shop for underwater sport equipment`,
+    description:
+      "Welcome to WaterWay Fins ! Here you'll find all you need for underwater sports. Shop for underwater equipment !",
+    url: `https://www.waterwayfins.eu`,
+    siteName: "Waterway Fins =",
+    images: [
+      {
+        url: "/empty-category.jpg",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 export default async function Home() {
   const category = await getCategory("frontpage");
