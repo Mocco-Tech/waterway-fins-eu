@@ -29,7 +29,7 @@ export default function RootLayout({
             <Header />
             {children}
             <Footer />
-            <Toaster offset={10} duration={3000} />
+            <Toaster offset={10} duration={3000} position="top-left" />
           </CartDataProvider>
         </ShopifyDataProvider>
       </body>
