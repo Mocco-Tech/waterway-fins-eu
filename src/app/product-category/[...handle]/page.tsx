@@ -30,6 +30,7 @@ export default async function CategoryPage({
         products={products}
         categoryHandle={collection.collectionByHandle.handle}
         categoryTitle={collection.collectionByHandle.title}
+        description={collection.collectionByHandle.description}
       />
     </section>
   );

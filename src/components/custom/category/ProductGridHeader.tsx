@@ -14,10 +14,12 @@ export default function ProductGridHeader({
   productsQty,
   categoryHandle,
   categoryTitle,
+  description,
 }: {
   productsQty: number;
   categoryHandle: string;
   categoryTitle: string;
+  description?: string;
 }) {
   const router = useRouter();
 
@@ -33,9 +35,12 @@ export default function ProductGridHeader({
 
   return (
     <div className="col-span-full w-full flex justify-between items-center px-4 md:px-0">
-      <p className="font-medium text-sm md:text-lg">
-        {categoryTitle} ({productsQty})
-      </p>
+      <div className="flex flex-col gap-1">
+        <p className="font-medium text-sm md:text-lg">
+          {categoryTitle} ({productsQty})
+        </p>
+        <p>{description}</p>
+      </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant={"ghost"} className="gap-2">

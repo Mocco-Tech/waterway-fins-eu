@@ -11,10 +11,12 @@ export default function GridSection({
   products,
   categoryHandle = "shop",
   categoryTitle = "Shop",
+  description = "",
 }: {
   products: Product[];
   categoryHandle?: string;
   categoryTitle?: string;
+  description?: string;
 }) {
   return (
     <section className="flex gap-10 pb-10">
@@ -24,6 +26,7 @@ export default function GridSection({
             productsQty={products.length}
             categoryHandle={categoryHandle}
             categoryTitle={categoryTitle}
+            description={description}
           />
           {products.length === 0 ? (
             <EmptyCategory />

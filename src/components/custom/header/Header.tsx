@@ -121,9 +121,6 @@ export default function Header() {
       <div className="px-4 md:px-10 w-full grid grid-cols-2 lg:grid-cols-3 items-center justify-between py-4">
         <div className="flex items-start gap-3">
           <Logo className="" />
-          <p className="hidden md:block text-red-600/90 font-medium lowercase italic text-sm">
-            New design
-          </p>
         </div>
 
         <div className="hidden lg:flex justify-self-center justify-start gap-2 items-center">
