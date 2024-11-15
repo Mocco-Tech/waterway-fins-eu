@@ -34,16 +34,16 @@ export default function ProductGridHeader({
   }
 
   return (
-    <div className="col-span-full w-full flex justify-between items-center px-4 md:px-0">
+    <div className={`col-span-full w-full flex items-center justify-between  px-4 md:px-0 ${categoryHandle === "shop"&&description?"":"flex-col gap-4 !items-start md:flex-row md:items-center"}`}>
       <div className="flex flex-col gap-1">
         <p className="font-medium text-sm md:text-lg">
           {categoryTitle} ({productsQty})
         </p>
-        <p>{description}</p>
+        <p className="text-sm md:text-base">{description}</p>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"ghost"} className="gap-2">
+          <Button variant={"secondary"} className="gap-2">
             Sorting
             <ArrowUpDown size={16} strokeWidth={1.25} />
           </Button>

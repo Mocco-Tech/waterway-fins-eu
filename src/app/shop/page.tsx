@@ -19,7 +19,7 @@ export default async function CategoryPage({
   const products = getSortedProducts(productsAll.edges, searchParams.sortBy!);
 
   return (
-    <section className="max-w-screen-2xl py-5 md:px-10">
+    <section className="max-w-screen-2xl mx-auto py-5 md:px-10">
       <GridSection products={products} />
     </section>
   );

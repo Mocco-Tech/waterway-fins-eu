@@ -25,7 +25,7 @@ export default async function CategoryPage({
   );
 
   return (
-    <section className="max-w-screen-2xl py-10 md:px-10">
+    <section className="max-w-screen-2xl mx-auto py-10 md:px-10">
       <GridSection
         products={products}
         categoryHandle={collection.collectionByHandle.handle}

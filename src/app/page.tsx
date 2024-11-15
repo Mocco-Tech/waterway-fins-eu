@@ -43,7 +43,7 @@ export default async function Home() {
   const categoriesArr = Object.values(categories);
 
   return (
-    <section className="max-w-screen-2xl">
+    <section className="max-w-screen-2xl mx-auto">
       <HeroBanner />
 
       <HomepageGrid
@@ -128,7 +128,8 @@ function HomepageGrid({
                   alt=""
                   width={1000}
                   height={1000}
-                  className="h-80 md:h-[70vh] mb-6 rounded-md object-cover"
+                  className="h-80 md:h-[70vh] lg:h-[450px] mb-6 rounded-md object-cover"
+                  priority
                 />
                 <p className="text-lg font-medium text-black">
                   {category.title}
