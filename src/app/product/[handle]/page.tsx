@@ -1,5 +1,4 @@
 import React from "react";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProductGallery from "@/components/custom/product/ProductGallery";
 import ProductDataProvider from "@/components/custom/product/ProductDataProvider";
 import ProductContent from "@/components/custom/product/ProductContent";
@@ -8,8 +7,12 @@ import StructuredData from "@/components/custom/product/StructuredData";
 
 export const revalidate = 3600;
 
-export default async function ProductPage({ params }: { params: Params }) {
-  const product = await getProduct(params.handle);
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ handle: string }>;
+}) {
+  const product = await getProduct((await params).handle);
 
   return (
     <ProductDataProvider product={product.productByHandle}>
@@ -29,9 +32,9 @@ export default async function ProductPage({ params }: { params: Params }) {
 export async function generateMetadata({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>;
 }) {
-  const props = await getProduct(params.handle);
+  const props = await getProduct((await params).handle);
   const product = props?.productByHandle;
   const productTitle = product?.seo?.title
     ? product?.seo?.title
@@ -51,7 +54,7 @@ export async function generateMetadata({
     openGraph: {
       title: productTitle,
       description: productDescription?.substr(0, 155),
-      url: `https://www.waterwayfins.eu/product/${params.handle}`,
+      url: `https://www.waterwayfins.eu/product/${(await params).handle}`,
       siteName: "WaterWay Fins",
       images: [
         {

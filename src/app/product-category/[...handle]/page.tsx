@@ -1,6 +1,5 @@
 import React from "react";
 import { getCategory } from "@/lib/queries/category";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import GridSection from "@/components/custom/category/GridSection";
 import { notFound } from "next/navigation";
 import { getSortedProducts } from "@/lib/helpers";
@@ -11,17 +10,19 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: {
-  params: Params;
-  searchParams: { sortBy?: string };
+  params: Promise<{ handle: string[] }>;
+  searchParams: Promise<{ sortBy?: string }>;
 }) {
-  const paramsforQuery = params.handle[params.handle.length - 1];
+  const paramsforQuery = (await params).handle[
+    (await params).handle.length - 1
+  ];
   const collection = await getCategory(paramsforQuery);
 
   if (collection.collectionByHandle === null) notFound();
 
   const products = getSortedProducts(
     collection.collectionByHandle.products.edges,
-    searchParams.sortBy!
+    (await searchParams).sortBy!
   );
 
   return (
@@ -39,9 +40,11 @@ export default async function CategoryPage({
 export async function generateMetadata({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string[] }>;
 }) {
-  const paramsforQuery = params.handle[params.handle.length - 1];
+  const paramsforQuery = (await params).handle[
+    (await params).handle.length - 1
+  ];
   const props = await getCategory(paramsforQuery);
   const collectionSeo = props?.collectionByHandle;
 
@@ -63,7 +66,9 @@ export async function generateMetadata({
     openGraph: {
       title: `${seoTitle} | WaterWay Fins`,
       description: seoDescription,
-      url: `https://www.waterwayfins.eu/product-category/${params?.handle}`,
+      url: `https://www.waterwayfins.eu/product-category/${
+        (await params).handle
+      }`,
       siteName: "WaterWay Fins",
       images: [
         {

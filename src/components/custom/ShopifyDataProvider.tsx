@@ -12,7 +12,7 @@ export default function ShopifyDataProvider({
     <ShopifyProvider
       storeDomain="https://waterwayfins.myshopify.com"
       storefrontToken="c0545fe0bc9968734c30d6b3bbea1893"
-      storefrontApiVersion="2024-07"
+      storefrontApiVersion="2025-04"
       countryIsoCode="EE"
       languageIsoCode="EN"
     >

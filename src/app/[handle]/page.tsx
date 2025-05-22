@@ -2,7 +2,6 @@ import React from "react";
 import PageContent from "@/components/custom/PageContent";
 import { getPage } from "@/lib/queries/page";
 import { AtSign, CircleHelp } from "lucide-react";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import FaqBlock from "@/components/custom/page/FaqBlock";
@@ -43,8 +42,13 @@ However, the approximate shipping price varies based on your location: 10-120€
   },
 ];
 
-export default async function page({ params }: { params: Params }) {
-  const pageData = await getPage(params.handle);
+export default async function page({
+  params,
+}: {
+  params: Promise<{ handle: string }>;
+}) {
+  const handle = (await params).handle;
+  const pageData = await getPage(handle);
 
   if (pageData === null) notFound();
 
@@ -54,7 +58,7 @@ export default async function page({ params }: { params: Params }) {
         <h1 className="text-2xl font-medium uppercase mb-8">
           {pageData.title}
         </h1>
-        {params.handle === "get-help" && <FaqBlock faqs={faqs} />}
+        {handle === "get-help" && <FaqBlock faqs={faqs} />}
 
         <PageContent rawHtmlContent={pageData.body.toString()} />
       </main>
@@ -84,9 +88,11 @@ export default async function page({ params }: { params: Params }) {
 export async function generateMetadata({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>;
 }) {
-  const pageSeo = await getPage(params.handle);
+  const handle = (await params).handle;
+
+  const pageSeo = await getPage(handle);
   if (pageSeo === null) notFound();
 
   const seoTitle = pageSeo?.seo.title ? pageSeo?.seo.title : pageSeo?.title;
@@ -102,7 +108,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${seoTitle} | WaterWay Fins`,
       description: seoDescription,
-      url: `https://www.waterwayfins.eu/${params?.handle}`,
+      url: `https://www.waterwayfins.eu/${handle}`,
       siteName: "WaterWay Fins",
       images: [
         {

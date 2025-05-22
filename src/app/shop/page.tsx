@@ -10,13 +10,16 @@ export const revalidate = 3600;
 export default async function CategoryPage({
   searchParams,
 }: {
-  searchParams: { sortBy?: string };
+  searchParams: Promise<{ sortBy?: string }>;
 }) {
   const productsAll = await getProducts();
 
   if (productsAll === null) notFound();
 
-  const products = getSortedProducts(productsAll.edges, searchParams.sortBy!);
+  const products = getSortedProducts(
+    productsAll.edges,
+    (await searchParams).sortBy as string
+  );
 
   return (
     <section className="max-w-screen-2xl mx-auto py-5 md:px-10">

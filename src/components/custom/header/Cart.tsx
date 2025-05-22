@@ -33,11 +33,11 @@ export default function Cart() {
         </div>
       </SheetTrigger>
       <SheetContent className="w-[90%] px-0 flex flex-col justify-between">
+        <SheetTitle className="hidden">Shopping cart</SheetTitle>
         {cart.totalQuantity !== 0 ? (
           <>
             <div className="px-4 overflow-y-scroll no-scrollbar">
               <SheetHeader className="mb-6">
-                <SheetTitle>Shopping cart</SheetTitle>
                 <SheetDescription className="hidden">
                   This is a shopping cart of WaterWay Fins website
                 </SheetDescription>
